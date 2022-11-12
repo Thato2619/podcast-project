@@ -19,4 +19,18 @@ const getAllPodcasts = async () => {
     /**
      * type {preview[]}
      */
-}
+
+    const data = await response.json()
+
+    let newHtml = ''
+
+    for (const {id, title, seasons} of data) {
+        newHtml = `
+        ${newHtml}
+            <li>
+                <button data-preview-button="${id}">${title}</button>
+                <span>(${seasons})</span>
+            </li>
+        `
+    }
+    htmlList.innerHTML = newHtml
