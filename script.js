@@ -34,3 +34,17 @@ const getAllPodcasts = async () => {
         `
     }
     htmlList.innerHTML = newHtml
+
+    /**
+     * @param {string} id
+     */
+    const getSinglePodcast = async (id) => {
+        htmlList.innerHTML = `Loading...`
+
+        const response = await fetch("https://podcast-api.netlify.app/id/<SHOW_ID>")
+
+        if (!response.ok){
+            htmlList.innerHTML = "Something went wrong!"
+            return
+        }
+    }
