@@ -15,4 +15,8 @@ const getAllPodcasts = async () => {
         htmlList.innerText = "There seems to be an issue!"
         return
     }
+
+    /**
+     * type {preview[]}
+     */
 }
