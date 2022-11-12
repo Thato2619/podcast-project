@@ -10,4 +10,9 @@ const getAllPodcasts = async () => {
 
     //fetch API 
     const response = await fetch('https://podcast-api.netlify.app/shows')
+
+    if(!response.ok){
+        htmlList.innerText = "There seems to be an issue!"
+        return
+    }
 }
