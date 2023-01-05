@@ -20,9 +20,33 @@ class Store {
 
     return this.update({
       single: null,
-      phase: "list",
+      phase: "list", 
       previews: data,
     });
+  }
+
+  /**
+   * 
+   * @param {string} id
+   */
+  async loadSingle(id) {
+    return this.update({
+      phase:'loading'
+    })
+    if (!id) throw new Error('"id" is required')
+    const response = await fetch(`https://podcast-api.netlify.app/id/${id})`);
+
+    if (!response.ok) {
+      return this.update({
+        phase: 'error'
+      })
+    }
+
+    const data = await response.json()
+    return this.update({
+      phase:'single',
+      single: data
+    })
   }
 
   /**
@@ -32,8 +56,8 @@ class Store {
     const prevState = { ...this.state };
     const nextState = { ...prevState, ...newState };
 
-    this.PushSubscriptionOptions.foreach((subsscriptionFn) => {
-      subsscriptionFn(nextState);
+    this.PushSubscriptionOptions.foreach((subscriptionFn) => {
+      subscriptionFn(nextState);
     });
 
     this.state = nextState;
@@ -43,7 +67,7 @@ class Store {
    * @param {import('./types').subscription} subscription
    */
   subscribe(newSubscription) {
-    if (this.subscription.includes(newSubscription)) {
+    if (this.subscriptions.includes(newSubscription)) {
       throw new Error("Subscription already exist");
     }
 
@@ -55,11 +79,11 @@ class Store {
    * @param {import('./types').subscription} subscription
    */
   unsubscribe(newSubscription) {
-    if (!this.subscription.includes(newSubscription)) {
+    if (!this.subscriptions.includes(newSubscription)) {
       throw new Error("subscription does not exist");
     }
 
-    this.subscriptions = this.subscriptions.filer(
+    this.subscriptions = this.subscriptions.filter(
       (item) => item !== newSubscription
     );
   }
@@ -82,3 +106,6 @@ class Store {
     this.loadList();
   }
 }
+
+export const store = new Store()
+export default store
