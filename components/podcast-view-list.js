@@ -1,7 +1,8 @@
-import {html, css, LitElement} from import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
+//import {html, css, LitElement} from import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
 import {LitElement, html} from 'http s://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
+import { store } from '../modules/store.js'
 
-const MONTHS = [
+/*const MONTHS = [
     'Jan',
     'Feb',
     'Mar',
@@ -14,7 +15,7 @@ const MONTHS = [
     'Oct',
     'Nov',
     'Dec',
-]
+]*/
     
 
 class Component extends HTMLElement{
@@ -29,7 +30,7 @@ class Component extends HTMLElement{
     constructor(){
         super()
 
-        this,disconnectedStore = connect((state) =>{
+        this.disconnectedStore = connect((state) =>{
             if (this.previews !== state.previews) { this.previews = state.previews }
             if (this.sorting !== state.sorting) { this.sorting = state.sorting }
             if (this.search !== state.search) {this.search = state.search}

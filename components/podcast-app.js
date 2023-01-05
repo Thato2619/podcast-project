@@ -1,5 +1,6 @@
 import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
-import { store } from '../store.js'
+import { store } from '../modules/store.js'
+
 
 class Component extends LitElement{
     static get properties() {
@@ -7,7 +8,9 @@ class Component extends LitElement{
             phase: {state: true},
         }
     }
-
+/**
+ * store connectors
+ */
     constructor(){
         super()
         const state = store.subscribe(this.storeChange)
@@ -18,7 +21,7 @@ class Component extends LitElement{
      * 
      * @param {import('..types/').state} state 
      */
-    storeChange(state) { 
+    storeChange = (state) =>  { 
         if(this.phase === state.phase) return
         this.phase = state.phase
     }

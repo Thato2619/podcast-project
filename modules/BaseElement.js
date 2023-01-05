@@ -7,8 +7,8 @@ class BaseElement extends LitElement{
         super()
         this.store = store
 
-        if(this.onStoreChange) {
-            store.subscribe(this.onStoreChange)
+        if(this.StoreChange) {
+            store.subscribe(this.StoreChange)
         }
 
 
@@ -21,8 +21,8 @@ class BaseElement extends LitElement{
      * @param {import('../../types').state} state
      */
     storeChange = {state} => {
-        if(this.previous === state.previous) return
-        this.previews = state.previews
+        if(this.phase === state.phase) return
+        this.phase= state.phase
     }
 
     disconnectedCallback() { store.unsubscribe(this.storeChange) }

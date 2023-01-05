@@ -1,3 +1,65 @@
+
+
+import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
+import { store } from '../modules/store.js'
+
+
+class Component extends LitElement{
+    static get properties() {
+        return{
+            phase: {state: true},
+        }
+    }
+/**
+ * store connectors
+ */
+    constructor(){
+        super()
+        const state = store.subscribe(this.storeChange)
+        this.storeChange(state)
+    }
+
+    /**
+     * 
+     * @param {import('..types/').state} state 
+     */
+    storeChange = (state) =>  { 
+        if(this.phase === state.phase) return
+        this.phase = state.phase
+    }
+    connectedCallback(){store.subscribe(this.update)}
+    disconnectedCallback(){store.unsubscribe(this.update)}
+
+    loadSingle() {
+        console.log('ncjsan')
+        this.active = 'single'
+    }
+
+    render(){
+        /**
+         * @type {import('../types').single[]}
+         */
+        const single = this.single
+
+        const list = preview.map(({ title }) => {
+            return html`<Li>${title}</Li>`
+        })
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 import {html, css, LitElement} from import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
 import {LitElement, html} from 'http s://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
 
@@ -13,7 +75,7 @@ class Component extends HTMLElement{
     constructor(){
         super()
 
-        this,disconnectedStore = connect((state) =>{
+        this.disconnectedStore = connect((state) =>{
             if (this.previews !== state.previews) { this.previews = state.previews }
             if (this.sorting !== state.sorting) { this.sorting = state.sorting }
             if (this.search !== state.search) {this.search = state.search}
