@@ -37,7 +37,7 @@ class Component extends LitElement{
 
     render(){
         /**
-         * @type {import('../types').single[]}
+         * @type {import('../types').show[]}
          */
         const single = this.single
 
@@ -48,6 +48,7 @@ class Component extends LitElement{
 
 }
 
+customElements.define('podcast-view-single', Component)
 
 
 
@@ -60,7 +61,7 @@ class Component extends LitElement{
 
 
 
-import {html, css, LitElement} from import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
+/*import {html, css, LitElement} from import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
 import {LitElement, html} from 'http s://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
 
 class Component extends HTMLElement{
@@ -94,7 +95,7 @@ class Component extends HTMLElement{
         /**
          * @type {import ('../types').preview[]}
          */
-        const preview = this.previews
+        /*const preview = this.previews
         const sortedPreviews = preview.sort((a,b) => a.title.localeCompare(b.title))
 
         const list = sortedPreviews.map(({title, id}) =>{
@@ -116,5 +117,4 @@ class Component extends HTMLElement{
         `
     }
 }
-
-customElements.define('podcast-view-single', Component)
+*/
