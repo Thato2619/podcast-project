@@ -1,6 +1,6 @@
 
 
-import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
+import {LitElement, html, css} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
 import { store } from '../modules/store.js'
 
 
@@ -10,6 +10,7 @@ class Component extends LitElement{
             phase: {state: true},
         }
     }
+
 /**
  * store connectors
  */
@@ -30,6 +31,12 @@ class Component extends LitElement{
    
     disconnectedCallback(){store.unsubscribe(this.storeChange)}
 
+      //add styling to h1 tag
+      static styles = css`
+      h1 {
+          color: coral;
+      }
+     `;
 
     render(){
         /**
