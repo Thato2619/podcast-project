@@ -1,7 +1,7 @@
 class Store {
   /**
    * 
-   * @param {import('../types').sorting} newSorting;
+   * @param {import('./types').sorting} newSorting;
    */
 
   changeSorting(newSorting) {
@@ -9,6 +9,18 @@ class Store {
       sorting: newSorting
     })
   }
+
+    /**
+   * 
+   * @param {string} newSearch;
+   */
+
+     changeSearch(newSearch) {
+      this.update({
+        search: newSearch
+      })
+    }
+
   async loadList() {
     if (this.state.previews.length > 0) {
       return this.update({
@@ -117,6 +129,18 @@ class Store {
     this.loadList();
   }
 }
+ 
+/**
+ * @param {import('./types').subscription} fn
+ * @returns
+ */
+export const connect = (fn) => {
+  const state = store.subscribe(fn)
+  fn(state)
+  return() => store.unsubscribe(fn)
+}
 
+ 
 export const store = new Store()
 export default store
+

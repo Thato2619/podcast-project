@@ -1,5 +1,5 @@
 import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
-import { store } from '../modules/store.js'
+import { store , connect } from '../store.js'
 
 
 class Component extends LitElement{
@@ -7,7 +7,7 @@ class Component extends LitElement{
     constructor(){
         super()
 
-        this.disconnectedStore = connect(({ state }) =>{
+        this.disconnectedStore = connect(({ state }) => {
             if(this.sorting !== state.sorting) {this.sorting = state.sorting}
             if(this.search !== state.search) {this.search = state.search}
         })

@@ -1,5 +1,5 @@
 import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
-import { store } from '../modules/store.js'
+import { store } from '../store.js'
 
 
 class Component extends LitElement{
@@ -13,25 +13,14 @@ class Component extends LitElement{
  */
     constructor(){
         super()
-        const state = store.subscribe(this.storeChange)
-        this.storeChange(state)
+
+        this.disconnectStore = connect((state) => {
+            if (this.previews === state.preiews) return
+            this.previews = state.preiews
+        })
     }
 
-    /**
-     * 
-     * @param {import('..types/').state} state 
-     */
-    storeChange = (state) =>  { 
-        if(this.phase === state.phase) return
-        this.phase = state.phase
-    }
-    connectedCallback(){store.subscribe(this.update)}
-    disconnectedCallback(){store.unsubscribe(this.update)}
-
-    loadSingle() {
-        console.log('ncjsan')
-        this.active = 'single'
-    }
+    disconnectedCallback() {this.disconnectStore()}
 
     render() {
         const loadSingleHandler = () => store.loadSingle('10182')
@@ -76,3 +65,7 @@ class Component extends LitElement{
 }
 
 customElements.define('podcast-app', Component)
+
+
+
+    

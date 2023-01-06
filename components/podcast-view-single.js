@@ -1,7 +1,7 @@
 
 
 import {LitElement, html, css} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
-import { store } from '../modules/store.js'
+import { store, connect} from '../store.js'
 
 
 class Component extends LitElement{
@@ -48,12 +48,14 @@ class Component extends LitElement{
          * @type {import('../types').show[]}
          */
         const show = this.single
+        if (!show) {
+            return html `<div></div>`
+        }
 
         return html `
+        <button>BACK</button>
 
-        <h1>
-            ${show.title || ''}
-        </h1>
+        <h1>${show.title || ''}</h1>
 
         <img src="${show.image}">
         `

@@ -3,13 +3,15 @@
 
 
 import {LitElement, html,css} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
-import { store } from '../modules/store.js'
+import { store , connect} from '../store.js'
 
 
 class Component extends LitElement{
     static get properties() {
         return{
             preiews : {state: true },
+            sorting : {state : true},
+            search: {state : true},
         }
     }
 
@@ -24,43 +26,53 @@ class Component extends LitElement{
  */
     constructor(){
         super()
-        const state = store.subscribe(this.storeChange)
-        this.storeChange(state)
+
+        this.disconnectedStore = connect(({ state }) => {
+            if(this.preiews!== state.previews) {this.previews = state.previews}
+            if(this.sorting !== state.sorting) {this.sorting = state.sorting}
+            if(this.search !== state.search) {this.search = state.search}
+            
+
+        })
+    }
+    disconnectedCallback() {this.disconnectedStore()}
+
+    static styles = css`
+    li{
+        border: 1px solid coral;
+    }
+    `
+    render() {
+        console.log(this.sorting)
+        const changeHandler = event => {
+            store.changeSorting(event.target.value)
+        
+}
     }
 
-    /**
-     * 
-     * @param {import('..types/').state} state 
-     */
-    storeChange = (state) =>  { 
-        if(this.previews === state.previews) return
-        this.previews = state.previews
-    }
-
-    disconnectedCallback(){store.unsubscribe(this.update)}
-
-    loadSingle() {
-        console.log('ncjsan')
-        this.active = 'single'
-    }
-
-    render(){
+    render() {
         /** 
          *  
          *  @type{import('..types/').preview[]} 
          */
         const preview = this.previews
-        const list = preview.map(({title}) => {
-            return html `<li>${title}</li>`
+        const sortedPreviews = preview.sort((a,b) => a.title.localecompare (b.title) )
+        const list = sortedPreviews.map(({title}) => {
+            const clickHandler = () => store.loadSingle(id)
+            return html `<li>
+            <button @click="${clickHandler}">
+            ${title}
+        </button>
+        </li>`
         })
+
         return html `
         <h1>Podcast List</h1>
-            <ul>
-             ${list}
-            </ul>`
-    }
-
-}
+        <podcast-controls></podcast-controls>
+        <ul>${list}</ul>
+        `
+        
+    }}
 customElements.define('podcast-view-list', Component)
 
 
