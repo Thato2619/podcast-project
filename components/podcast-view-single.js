@@ -46,9 +46,9 @@ class Component extends LitElement{
 
         return html `
 
-        <div>
+        <h1>
             ${show.title || ''}
-        </div>
+        </h1>
         `
     }
 
