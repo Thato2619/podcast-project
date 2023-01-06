@@ -36,6 +36,10 @@ class Component extends LitElement{
       h1 {
           color: coral;
       }
+
+      img {
+          width:100px;
+      }
      `;
 
     render(){
@@ -49,6 +53,8 @@ class Component extends LitElement{
         <h1>
             ${show.title || ''}
         </h1>
+
+        <img src="${show.image}">
         `
     }
 
