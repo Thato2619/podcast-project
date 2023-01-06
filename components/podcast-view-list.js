@@ -53,8 +53,10 @@ class Component extends LitElement{
         const list = preview.map(({title}) => {
             return html `<li>${title}</li>`
         })
-        return html `<ul>
-            ${list}
+        return html `
+        <h1>Podcast List</h1>
+            <ul>
+             ${list}
             </ul>`
     }
 

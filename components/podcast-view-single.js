@@ -45,6 +45,7 @@ class Component extends LitElement{
         const show = this.single
 
         return html `
+
         <div>
             ${show.title || ''}
         </div>
