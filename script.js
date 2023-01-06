@@ -40,17 +40,14 @@ async function renderSingle(podcastID, podcastImage){
 }
 
 function renderAll(){
-  document.querySelector("#app").innerHTML = ""
+ const podacast = document.querySelector("#app");
 
+ podcasts.innerHTML = "";
   const nav = document.getElementById("nav")
   nav.removeChild(nav.lastChild)
 
-  for(let i=0; i<showData.length; i++){
-    const podacasts = document.querySelector("#all");
-    const {id, image, title, seasons} = showData[i];
-
+  showData.foreach(({id, image, title, seasons }) =>{
     const preview = document.createElement('podcast-preview')
-
     preview.key = id
     preview.image = image
     preview.label = title
@@ -59,12 +56,18 @@ function renderAll(){
 
     podcast.addEventListener("click", () => {
       document.querySelector("#app").innerHTML = "LOADING....."
+      renderSingle(id, image)
     }) 
 
-    podcast.addEventListener("click", () => {
-      renderSingle(podcast.id, showData[i].image)
-    })
-  }
+  })
+
+  const list = document.createElement('div')
+  const html = list.map(({ id, image, title, seasons}) => {
+    return html `
+    <podcast-preview image="${image}" key="${id}" label="${title}" seasons="${seasons}"></podcast-preview>
+    `
+  })
+
 }
 renderAll()
 

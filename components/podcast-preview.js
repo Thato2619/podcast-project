@@ -30,6 +30,10 @@ class Component extends LitElement{
             z-index: 1;
         }
 
+        .wrapper:hover{
+            opacity:0.5;
+        }
+
         .image{
             height:10rem;
             width:10rem;
@@ -60,12 +64,13 @@ class Component extends LitElement{
             left:88%;
             font-size:small;
         }
+
         `;
 
     render(){
         const seasonText = `${this.seasons}  Season${this.seasons > 1 ? 's' : ''}`
         return html `
-            <div class="wrapper">
+            <div class="wrapper" @click="${this.handleClicks}">
                 <div class="image">
                     <img src="${this.image}">
                 </div>
