@@ -28,9 +28,45 @@ async function renderSingle(podcastID, podcastImage){
     renderAll()
   }) 
 
-  
+  nav.appendChild(home)
+  console.log(podcastID)
 
+  const thisPodcast = document.querySelector("#app")
+  thisPodcast.innerHTML = html `
+  <div>
+    <img src="${podcastImage}">
+  </div>
+ `;
 }
+
+function renderAll(){
+  document.querySelector("#app").innerHTML = ""
+
+  const nav = document.getElementById("nav")
+  nav.removeChild(nav.lastChild)
+
+  for(let i=0; i<showData.length; i++){
+    const podacasts = document.querySelector("#all");
+    const {id, image, title, seasons} = showData[i];
+
+    const preview = document.createElement('podcast-preview')
+
+    preview.key = id
+    preview.image = image
+    preview.label = title
+    preview.seasons = seasons
+    podacasts.appendChild(preview)
+
+    podcast.addEventListener("click", () => {
+      document.querySelector("#app").innerHTML = "LOADING....."
+    }) 
+
+    podcast.addEventListener("click", () => {
+      renderSingle(podcast.id, showData[i].image)
+    })
+  }
+}
+renderAll()
 
 /*//manipulate the dom
 const htmlList = document.querySelector("#app");
