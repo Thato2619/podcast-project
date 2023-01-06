@@ -5,4 +5,4 @@ class Component extends HTMLElement{
     }
 }
 
-customElements.define('podcast-app', Component)
+customElements.define('podcast-meta', Component)

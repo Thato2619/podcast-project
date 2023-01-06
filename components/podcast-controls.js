@@ -20,9 +20,10 @@ class Component extends LitElement{
         console.log(this.sorting)
         const changeHandler = event => {
             store.changeSorting(event.target.value)
-
         }
-        
+        const inputHandler = event => {
+            store.changeSorting(event.target.value)
+        }
         return html `
         <div>
             <label>

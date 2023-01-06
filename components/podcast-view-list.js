@@ -60,6 +60,24 @@ class Component extends LitElement{
             store.changeSorting(event.target.value)
         
 }
+
+        const searchHandler = event => {
+            store.changeSearch(event.target.value)
+
+            return html`
+            <div>
+                <label>
+                    <span>Search</span>
+                    <input @change="${searchHandler}" value="${this.search}">
+                </label>
+            </div>
+
+            <label>
+                sorting 
+                <select></select>
+            </label>
+            `
+}
     }
 
     render() {
@@ -69,6 +87,12 @@ class Component extends LitElement{
          */
         const preview = this.previews
 
+        const filteredPreviews = this.previews.filter(item => {
+            console.log(!this.search, item.title)
+
+            if(!this.search) return true
+            return item.title.toLowercase()includes(this.search.toLowercase())
+        })
         const sortedPreviews = preview.sort((a,b) => {
             if (this.sorting === 'a-z') return a.title.localecompare(b.title)
             if (this.sorting === 'z-a') return a.title.localecompare(a.title)
@@ -80,6 +104,7 @@ class Component extends LitElement{
         
             if (this.sorting === 'oldest-earliest') return dateA - dateB
             if (this.sorting === 'earliest-oldest') return dateA - dateA
+
             throw new Error('Invalid sorting')
         })
      
