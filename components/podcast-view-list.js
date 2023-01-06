@@ -2,7 +2,7 @@
 
 
 
-import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
+import {LitElement, html,css} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
 import { store } from '../modules/store.js'
 
 
@@ -12,6 +12,13 @@ class Component extends LitElement{
             preiews : {state: true },
         }
     }
+
+    //add styling 
+    static styles = css`
+    li {
+        border: 1px solid green
+    }
+    `;
 /**
  * store connectors
  */
