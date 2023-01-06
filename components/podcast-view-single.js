@@ -52,6 +52,24 @@ class Component extends LitElement{
             return html `<div></div>`
         }
 
+        const seasons = show.seasons.map(({ episodes, title}) => {
+            return html`
+            <div>
+                <strong>${title}</strong>
+                ${episodes.map(({file, title: innerTitle }) =>{
+                    return html `
+                    <div>
+                        <div>${innerTitle}</div>
+                        <audio controls>
+                            <source src="https://file-examplea.com.storage/fe8c7eef0c6364f6c9504cc/2017/11/file_example_MP3_700KB.mp3" type="audio/mp3">
+                        </audio>
+                    </div>
+                    `
+                })}
+            </div>
+            `
+        })
+
         return html `
         <button>BACK</button>
 

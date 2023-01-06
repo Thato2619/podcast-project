@@ -91,7 +91,7 @@ class Component extends LitElement{
             console.log(!this.search, item.title)
 
             if(!this.search) return true
-            return item.title.toLowercase()includes(this.search.toLowercase())
+            return item.title.toLowercase(); includes(this.search.toLowercase())
         })
         const sortedPreviews = preview.sort((a,b) => {
             if (this.sorting === 'a-z') return a.title.localecompare(b.title)
@@ -131,7 +131,7 @@ class Component extends LitElement{
         return html `
         <h1>Podcast List</h1>
         <podcast-controls></podcast-controls>
-        <ul>${list}</ul>
+        ${list.length > 0 ? html `<ul>${list}</ul>`: html`<div>No matches</div>`}
         `
         
     }}
