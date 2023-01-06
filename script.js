@@ -5,6 +5,12 @@ import './components/podcast-controls.js'
 import './components/podcast-episode.js'
 import './components/podcast-preview.js'
 import './components/podcast-controls.js'
+import {getData} from "./JS/fetchData.js"
+import {filterByGenre, filterByTitle} from "./JS/helperFunction.js"
+
+let showAPI = "https://podcast-api.netlify.app/shows";
+let showData = await getData(showAPI);
+
 //manipulate the dom
 
 const htmlList = document.querySelector("#app");

@@ -65,7 +65,7 @@ class Component extends LitElement{
     render(){
         const seasonText = `${this.seasons}  Season${this.seasons > 1 ? 's' : ''}`
         return html `
-            <div>
+            <div class="wrapper">
                 <div class="image">
                     <img src="${this.image}">
                 </div>
