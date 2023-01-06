@@ -39,6 +39,7 @@ class Component extends LitElement{
 
       img {
           width:100px;
+          height: 100px;
       }
      `;
 
