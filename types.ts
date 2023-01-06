@@ -31,11 +31,13 @@ export type show = {
 }
 
 export type phase = "loading"| "lists"| "single"|"error"
+export type sorting = 'a-z'| 'z-a'|'oldest-latest'|'latest-oldest'
 
 export type state = {
     phase: phase
     previews: preview[]
     single: null | show
+    sorting: sorting
 }
 
 export type subscription = (state: state) => void

@@ -1,4 +1,13 @@
 class Store {
+  /**
+   * 
+   * @param {import('../types').sorting} newSorting
+   */
+  changeSortinf(newSorting){
+    this.update{(
+      sorting
+    )}
+  }
   async loadList() {
     if (this.state.previews.length > 0) {
       return this.update({
@@ -101,6 +110,7 @@ class Store {
       phase: "loading",
       previews: [],
       single: null,
+      sorting: 'a-z'
     };
 
     this.loadList();
