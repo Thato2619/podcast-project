@@ -38,8 +38,9 @@ class Component extends LitElement{
     }
 
     render(){
-        /**
-         * @type{import('..types/').preview[]} 
+        /** 
+         *  
+         *  @type{import('..types/').preview[]} 
          */
         const preview = this.previews
         const list = preview.map(({title}) => {

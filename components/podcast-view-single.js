@@ -27,23 +27,21 @@ class Component extends LitElement{
         if(this.phase === state.phase) return
         this.phase = state.phase
     }
-    connectedCallback(){store.subscribe(this.update)}
-    disconnectedCallback(){store.unsubscribe(this.update)}
+   
+    disconnectedCallback(){store.unsubscribe(this.storeChange)}
 
-    loadSingle() {
-        console.log('ncjsan')
-        this.active = 'single'
-    }
 
     render(){
         /**
          * @type {import('../types').show[]}
          */
-        const single = this.single
+        const show = this.single
 
-        const list = preview.map(({ title }) => {
-            return html`<Li>${title}</Li>`
-        })
+        return html `
+        <div>
+            ${show.title || ''}
+        </div>
+        `
     }
 
 }
