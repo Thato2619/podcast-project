@@ -5,7 +5,19 @@
 import {LitElement, html,css} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
 import { store , connect} from '../store.js'
 
-
+const MONTHS = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',]
 class Component extends LitElement{
     static get properties() {
         return{
@@ -56,13 +68,38 @@ class Component extends LitElement{
          *  @type{import('..types/').preview[]} 
          */
         const preview = this.previews
-        const sortedPreviews = preview.sort((a,b) => a.title.localecompare (b.title) )
-        const list = sortedPreviews.map(({title}) => {
+
+        const sortedPreviews = preview.sort((a,b) => {
+            if (this.sorting === 'a-z') return a.title.localecompare(b.title)
+            if (this.sorting === 'z-a') return a.title.localecompare(a.title)
+
+            const dateA = new Date(a.updated).getTime()
+            const dateB = new Date(b.updated).getTime()
+
+            if (this.sorting === 'oldest-latest') return dateA - dateB
+        
+            if (this.sorting === 'oldest-earliest') return dateA - dateB
+            if (this.sorting === 'earliest-oldest') return dateA - dateA
+            throw new Error('Invalid sorting')
+        })
+     
+    
+        const list = sortedPreviews.map(({title , id, updated}) => {
+            const date = new Date(updated)
+            const day = date.getDate().toString().padStart(2, '0')
+            const month = MONTHS[date.getMonth() - 1]
+            const year = date.getFullYear()
+            const updatedString = `${day}/${month}/${year}`
+
+
             const clickHandler = () => store.loadSingle(id)
+
+
             return html `<li>
             <button @click="${clickHandler}">
             ${title}
         </button>
+        <div> Updated : ${day}/${month}/${year}</div>
         </li>`
         })
 
