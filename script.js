@@ -11,8 +11,28 @@ import {filterByGenre, filterByTitle} from "./JS/helperFunction.js"
 let showAPI = "https://podcast-api.netlify.app/shows";
 let showData = await getData(showAPI);
 
-//manipulate the dom
+//async function
+async function renderSingle(podcastID, podcastImage){
+  document.querySelector("#app").innerHTML = ""
+  let thisShow = `https://podcast-api.netlify.app/id/${podcastID}`
+  await getData(thisShow)
 
+  const nav = document.getElementById("nav")
+  const home = document.createElement("li")
+  home.id = "HOME"
+  home.innerHTML = html `
+  <button>HOME</button>
+  `
+  //add eventlistener
+  home.addEventListener("click", () => {
+    renderAll()
+  }) 
+
+  
+
+}
+
+/*//manipulate the dom
 const htmlList = document.querySelector("#app");
 
 //add async function to get all podcast needed
@@ -31,7 +51,7 @@ const getAllPodcasts = async () => {
    * type {preview[]}
    */
 
-  const data = await response.json();
+  /*const data = await response.json();
 
   let newHtml = "";
 
@@ -49,7 +69,7 @@ const getAllPodcasts = async () => {
 /**
  * @param {string} id
  */
-const getSinglePodcast = async (id) => {
+/*const getSinglePodcast = async (id) => {
   htmlList.innerHTML = `Loading...`;
 
   const response = await fetch(`https://podcast-api.netlify.app/id/${id}`);
@@ -62,7 +82,7 @@ const getSinglePodcast = async (id) => {
   /**
    * @type {show}
    */
-  const data = await response.json();
+  /*const data = await response.json();
 
   let seasonsList = "";
 
@@ -96,4 +116,4 @@ document.body.addEventListener("click", (event) => {
   return;
 });
 
-getAllPodcasts();
+getAllPodcasts();*/
