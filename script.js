@@ -1,19 +1,18 @@
-import './components/modules/main.js'
-import './components/podacast-view-list.js'
+import './modules/main.js'
+import './components/podcast-view-list.js'
 import './components/podcast-app.js'
 import './components/podcast-controls.js'
 import './components/podcast-episode.js'
 import './components/podcast-preview.js'
 import './components/podcast-controls.js'
-import {getData} from "./JS/fetchData.js"
-import {filterByGenre, filterByTitle} from "./JS/helperFunction.js"
+//import {getData} from "./JS/fetchData.js"
 
 let showAPI = "https://podcast-api.netlify.app/shows";
-let showData = await getData(showAPI);
+//let showData = await getData(showAPI);
 
 //async function
-async function renderSingle(podcastID, podcastImage){
-  document.querySelector("#app").innerHTML = ""
+//async function renderSingle(podcastID, podcastImage){
+ /* document.querySelector("#app").innerHTML = ""
   let thisShow = `https://podcast-api.netlify.app/id/${podcastID}`
   await getData(thisShow)
 
@@ -37,12 +36,12 @@ async function renderSingle(podcastID, podcastImage){
     <img src="${podcastImage}">
   </div>
  `;
-}
+}*/
 
-function renderAll(){
- const podacast = document.querySelector("#app");
+/*function renderAll(){
+ const podcast = document.querySelector("#app");
 
- podcasts.innerHTML = "";
+ podcast.innerHTML = "";
   const nav = document.getElementById("nav")
   nav.removeChild(nav.lastChild)
 
@@ -69,7 +68,7 @@ function renderAll(){
   })
 
 }
-renderAll()
+renderAll()*/
 
 /*//manipulate the dom
 const htmlList = document.querySelector("#app");

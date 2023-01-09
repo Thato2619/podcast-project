@@ -78,7 +78,7 @@ class Store {
     const prevState = { ...this.state };
     const nextState = { ...prevState, ...newState };
 
-    this.PushSubscriptionOptions.foreach((subscriptionFn) => {
+    this.subscriptions.forEach((subscriptionFn) => {
       subscriptionFn(nextState);
     });
 
@@ -93,7 +93,7 @@ class Store {
       throw new Error("Subscription already exist");
     }
 
-    this.PushSubscriptionOptions.push(newSubscription);
+    this.subscriptions.push(newSubscription);
     return { ...this.state };
   }
 
